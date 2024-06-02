@@ -46,19 +46,19 @@ class TodoCrudController extends Controller
      */
     public function store(Request $request)
     {
-        $validation = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'status' => 'required',
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
         ]);
-        $data = TodoCrud::create($validation);
-        if ($data) {
-            session()->flash('success', ' Add Successfully');
-            return redirect(route('todolistindex'));
-        } else {
-            session()->flash('error', 'Some problem occure');
-            return redirect(route('todolistindex'));
-        }
+
+        // Create a new todo item with default status
+        $todo = new TodoCrud();
+        $todo->title = $validatedData['title'];
+        $todo->status = 0; // Set default status
+        $todo->description = 'default description';
+        $todo->save();
+
+        // Redirect back or do any other response as needed
+        return redirect()->back()->with('success', 'Task added successfully!');
     }
 
     /**

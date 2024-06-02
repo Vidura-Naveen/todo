@@ -21,22 +21,26 @@
 
                           <h4 class="text-center my-3 pb-3">To Do App</h4>
 
-                          <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                          <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" action="{{ route('todoliststore') }}" method="POST">
+                            @csrf
                             <div class="col-12">
-                              <div data-mdb-input-init class="form-outline">
-                                <input type="text" id="form1" class="form-control" />
-                                <label class="form-label" for="form1">Enter a task here</label>
-                              </div>
+                                <div class="form-outline">
+                                    <input type="text" id="title" name="title" class="form-control" />
+                                    <label class="form-label" for="title">Enter a task here</label>
+                                </div>
                             </div>
 
-                            <div class="col-12">
-                              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Save</button>
-                            </div>
+                            <!-- Hidden field for default status -->
+                            {{-- <input type="hidden" id="status" name="status" value="0"> --}}
 
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
                             <div class="col-12">
                                 <a href="{{ route('todolistadd')}}" type="button" class="btn btn-secondary">ADD</a>
                             </div>
-                          </form>
+
 
                           <table class="table mb-4">
                             <thead>
