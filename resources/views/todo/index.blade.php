@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="col-12">
-                              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning">Get tasks</button>
+                                <a href="{{ route('todolistadd')}}" type="button" class="btn btn-secondary">ADD</a>
                             </div>
                           </form>
 

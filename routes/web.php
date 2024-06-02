@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/todolist', [TodoCrudController::class, 'index'])->name('todolistindex');
+    Route::get('/todolistadd', [TodoCrudController::class, 'create'])->name('todolistadd');
+    Route::post('/todolist/save/', [TodoCrudController::class, 'save'])->name('todolistsave');
+    Route::post('/todolist/store/', [TodoCrudController::class, 'store'])->name('todoliststore');
     Route::get('/todolist/delete/{id}', [TodoCrudController::class, 'destroy'])->name('todolistdelete');
     Route::get('/todolist/edit/{id}', [TodoCrudController::class, 'update'])->name('todolistedit');
 });

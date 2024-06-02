@@ -22,9 +22,25 @@ class TodoCrudController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        return view('todo.create');
     }
 
+    public function save(Request $request)
+    {
+        $validation = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        $data = TodoCrud::create($validation);
+        if ($data) {
+            session()->flash('success', ' Add Successfully');
+            return redirect(route('todolistindex'));
+        } else {
+            session()->flash('error', 'Some problem occure');
+            return redirect(route('todolistindex'));
+        }
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -37,11 +53,11 @@ class TodoCrudController extends Controller
         ]);
         $data = TodoCrud::create($validation);
         if ($data) {
-            session()->flash('success', 'Product Add Successfully');
-            return redirect(route('/todolist'));
+            session()->flash('success', ' Add Successfully');
+            return redirect(route('todolistindex'));
         } else {
             session()->flash('error', 'Some problem occure');
-            return redirect(route('/todolist'));
+            return redirect(route('todolistindex'));
         }
     }
 
@@ -84,7 +100,7 @@ class TodoCrudController extends Controller
             return redirect()->back();
         } else {
             session()->flash('error', 'Product Not Delete successfully');
-            return redirect(route('/todolist'));
+            return redirect(route('/todolistindex'));
         }
     }
 }
